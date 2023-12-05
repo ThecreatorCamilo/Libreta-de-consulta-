@@ -58,16 +58,80 @@ int esDepartamentoColombia(const char *departamento) {
     return 0; // Departamento no encontrado en la lista de Colombia
 }
 
-int correos(const char *corr){
-    const char *direccion_correo[]={"@gmail.com","@hotmail.com","@correo.uis.edu.co"};
-    for (int i = 0; i < sizeof(direccion_correo); i++) {
-        
-        if (strcmp(corr, direccion_correo[i]) == 0) {
+int muni( const char *munic){
+    
+    const char *municipios[]={
+        "Leticia", "Puerto nariño", "Cáceres", "Caucasia", "El bagre", "Nechí", "Terazá", "Zaragoza", "Caracolí", "Maceo",
+        "Puerto berrío", "Puerto Nare", "Puerto triunfo", "Yondó", "Amalfi", "Anorí", "Cisneros", "Remedios", "San roque",
+        "Santo domingo", "Segovia", "Vegachí", "Yalí", "Yolombó", "Angostura", "Belmira", "Briceño", "Campamento", "Carolina del príncipe",
+        "Donmatías", "Entrerríos", "Gómez plata", "Guadalupe", "Ituango", "San andrés de cuerquia", "San josé de la montaña",
+        "San pedro de los milagros", "Santa rosa de osos", "Toledo", "Valdivia", "Yurumal", "Abriaquí", "Santa fe de antioquia",
+        "Anzá", "Armenia", "Buriticá", "Caicedo", "Cañasgordas", "Dabeiba", "Ebéjico", "Frontino", "Giraldo", "Heliconia", "Liborina",
+        "Olaya", "Peque", "Sabanalarga", "San jerónimo", "Sopetrán", "Uramita", "Abejorral", "Alejanría", "Argelia", "El carmen de viboral",
+        "Cocorná", "El peñol", "El retiro", "El santuario", "Granada", "Guarne", "Guatapé", "La ceja", "La unión", "Marinilla", "Nariño",
+        "Rionegro", "San carlos", "San francisco", "San luis", "San rafael", "San vicente", "Sonsón", "Amagá", "Andes", "Angelópolis",
+        "Betania", "Betulia", "Caramanta", "Ciudad bolivar", "Concordia", "Fredonia", "Hispania", "Jardín", "Jericó", "La pintada", "Montebello",
+        "Pueblorrico", "Salgar", "Santa Bárbara", "Támesis", "Tarso", "Titiribí", "Urrao", "Valparaíso", "Venecia", "Apartadó", "Arboletes",
+        "Carepa", "Chigorodó", "Murindó", "Mutatá","Necoclí", "San juan de urabá", "Turbó", "Vigía del fuerte", "Barbosa", "Bello", "Caldas",
+        "Copacabana", "Envigado", "Girardota", "Itagüí", "La estrella", "Medellín", "Sabaneta", "Arauca", "Arauquita", "Cravo norte", 
+        "Fuertul", "Puerto rondón", "Saravena", "Tame", "Barranquilla", "Baranoa", "Campo de la cruz", "Candelaria", "Galapa", "Juan de acosta",
+        "Luruaco","Malambo", "Manatí", "Palmar de varela", "Piojó", "Polonuevo", "Ponedera", "Puerto colombia", "Repelón", "Sabanagrande", "Sabanalarga", "Santa lucía",
+        "Santo tomás", "Soledad", "Suan", "Tubará", "Usiacurí", "Achí", "Altos del rosario", "Arenal", "Arjona", "Arroyohondo", "Barranco de loba",
+        "Calamar", "Cantagallo", "El carmen de bolívar", "Cartagena de indias", "Cicuco", "Clemencia", "Córdoba", "El guamo", "El peñón", "Hatillo de loba",
+        "Magangué", "Mahates", "Margarita", "María la baja", "Morales", "Norosí", "Pinillos", "Regidor", "Río viejo", "San cristóbal", "San estanislao", "San fernando", 
+        "San jacinto", "San jacinto del cauca", "San juan nepomuceno", "San martín de loba", "San pablo", "Santa catalina", "Santa cruz mompox", "Santa rosa", "Santa rosa del sur",
+        "Simití", "Soplaviento", "Talaigua nuevo", "Tiquisio", "Turbaco", "Turbaná", "Villanueva", "Zambrano", "Chiquiza", "Chivata", "Combita", "Cucaita", "Motavita", "Oicatá", "Samacá",
+        "Siachoque", "Sora", "Soracá", "Sotaquirá", "Toca","Tunja", "Tuta", "Ventaquemada", "Chiscas", "El cocuy", "El espino", "Guacamayas", "Güicán", "Panqueba", "Labranzagrande",
+        "Pajarito", "Paya", "Pisba", "Berbeo", "Campohermoso", "Miraflores", "Páez", "San eduardo", "Zetaquira", "Boyacá", "Ciénaga", "Jenesano", "Nuevo Colón", "Ramiriquí", "Rondón",
+        "Tibaná", "Turmequé", "Úmbita", "Viracachá", "Chinavita", "Garagoa", "Macanal", "Pachavita", "San luis de gaceno", "Santa maría", "Boavita", "Covarachía", "La uvita", "San mateo",
+        "Sativanorte", "Sativasur", "Soatá", "Susacón", "Tipacoque", "Briceño", "Buenavista", "Caldas", "Chiquinquirá", "Coper", "La victoria", "Maripí", "Muzo", "Otanche", "Pauna", "Quípama",
+        "Saboyá", "San miguel de sema", "San pablo de borbur", "Tunuringuá", "Almeida", "Chivor", "Guateque", "Guayatá", "La capilla", "Somondoco", "Sutantenza", "Tenza", "Arcabuco", "Chitaraque", 
+        "Gachantivá", "Moniquirá", "Ráquira", "Sáchica", "San josé de pare", "Santa sofía", "Santana", "Sutamarchán", "Tinjacá", "Tigüí", "Villa de leyva", "Aquitania", "Cuítiva", "Firavitoba", "Gámeza",
+        "Iza", "Mongua", "Monguí", "Nobsa", "Pesca", "Sogamoso", "Tibasosa", "Tópaga", "Tota", "Belén", "Busbanzá", "Cerinza", "Corrales", "Duitama", "Floresta", "Paipa", "Santa rosa de viterbo", "Tutazá",
+        "Betéitiva", "Chita", "Jericó", "Paz de río", "Socha", "Socotá", "Tasco", "Cubará", "Puerto Boyacá", "Filadelfia", "La merced", "Marmato", "Riosucio", "Supía", "Manzanares", "Marquetalia", "Marulanda",
+        "Pensilvania", "Anserma", "Belalcázar", "Risaralda", "San josé", "Viterbo", "Chinchiná", "Manizales", "Neira", "Palestina", "Villamaría", "La dorada", "Norcasia", "Samaná", "Victoria", "Aguadas", "Aranzazu",
+        "Pácora", "Salamina", "Albania", "Belen de los andaquies", "Cartagena del chairá", "Curillo", "El doncello", "El paujil", "Florencia", "La montañita", "Morelia", "Puerto milán", "Puerto rico", "San josé del fragua",
+        "San vicente del caguán", "Solano", "Solita", "Valparaíso", "Aguazul", "Chámeza", "Hato corozal", "La salina", "Maní", "Monterrey", "Nunchía", "Orocué", "Paz de ariporo", "Pore", "Recetor", "Sabanalarga", "Sácama",
+        "San luis del palenque", "Támara", "Tauramena", "Trinidad", "Villanueva", "Yopal", "Buenos aires", "Caloto", "Corinto", "Guachené", "Miranda", "Padilla", "Puerto tejada", "Santander de quilichao", "Suárez", "Villa rica",
+        "Cajibío", "El tambo", "La sierra", "Morales", "Piendamó", "Popayán", "Rosas", "Sotará", "Timbío", "Almaguer", "Argelia", "Balboa", "Florencia", "La vega", "Mercaderes", "Patía", "Piamonte", "San sebastián", "Santa rosa",
+        "Sucre", "Guapi", "López de micay", "Timbiquí", "Caldono", "Inzá", "Jambaló", "Páez", "Puracé-coconuco", "Silvia", "Toribío", "Totoró", "Acandí", "Alto Baudó", "Altrato", "Bagadó", "Bahía solano", "Bajo baudó", "Belém de bajirá",
+        "Bojayá", "Carmen del darién", "Cértegui", "Condoto", "El cantón de san pablo", "El carmen de atrato", "El litoral de san juan", "Istmina", "Juradó", "Lloró", "Medio atrato", "Medio baudó", "Medio san juan", "Nóvita", "Nuquí", 
+        "Quibdó", "Río iró", "Río quito", "Riosucio", "San josé del palmar", "Sipí", "Tadó", "Unguía", "Unión panamericana", "Ayapel", "Buenavista", "Canalete", "Cereté", "Chimá", "Chinú", "Ciénaga de oro", "Cotorra", "La apartada", 
+        "Los córdobas", "Momil", "Montelíbano", "Montería", "Moñitos", "Planeta rica", "Pueblo nuevo", "Puerto escondido", "Puerto libertador", "Purísima", "Sahagún", "San andrés de sotavento", "San antero", "San bernardo del viento",
+        "San carlos", "San josé de uré", "San pelayo", "Santa cruz de lorica", "Tierralta", "Tuchín", "Valencia", "Chocontá", "Machetá", "Manta", "Sesquilé", "Suesca", "Tibirita", "Villapinzón", "Agua de dios", "Girardot", "Guataquí", 
+        "Jerusalén", "Nariño", "Nilo", "Ricaurte", "Tocaima", "Caparrapí", "Guaduas", "Puerto salgar", "Albán", "La peña", "La vega", "Nimaima", "Nocaima", "Quebradanegra", "San francisco", "Sasaima", "Supatá", "Útica", "Vergara", "Villeta",
+        "Gachalá", "Gachetá", "Gama", "Guasca", "Guatavita", "Junín", "La calera", "Ubalá", "Beltrán", "Bituima", "Chaguaní", "Guayabal de síquima", "Pulí", "San juan de rioseco", "Vianí", "Medina", "Paratebueno", "Cáqueza", "Chipaque", "Choachí",
+        "Fómeque", "Fosca", "Guayabetal", "Gutiérrez", "Quetame", "Ubaque", "Une", "El peñón", "La palma", "Pacho", "Paime", "San cayetano", "Topaipí", "Villagómez", "Yacopí", "Cajicá", "Chía", "Cogua", "Cota", "Gachancipá", "Nemocón", "Sopó", "Tabio",
+        "Tenjo", "Tocancipá", "Zipaquirá", "Bojacá", "El rosal", "Facatativá", "Funza", "Madrid", "Mosquera", "Subachoque", "Zipacón", "Sibaté", "Soacha", "Arbeláez", "Cabrera", "Fusagasugá", "Granada", "Pandi", "Pasca", "San bernardo", "Silvania", "Tibacuy",
+        "Venecia", "Anapoima", "Anolaima", "Apulo", "Cachipay", "El colegio", "La mesa", "Quipile", "San antonio de la tequendama", "Tena", "Viotá", "Carmen de carupa", "Cucunubá", "Fúquene", "Guachetá", "Lenguazaque", "Simijaca", "Susa", "Sutatausa", "Tausa", "Ubaté",
+        "Barrancominas", "Inírida", "Calamar", "El retorno", "Miraflores", "San jose del guaviare", "Aipe", "Algeciras", "Baraya", "Campoalegre", "Colombia", "Hobo", "Íqira", "Neiva", "Palermo", "Rivera", "Santa maría", "Tello", "Teruel", "Villavieja", "Yaguará", "Agrado",
+        "Altamira", "Garzón", "Gigante", "Guadalupe", "Pital", "Suaza", "Tarqui", "La argentina", "La plata", "Nátaga", "Paicol", "Tesalia", "Acevedo", "Elías", "Isnos", "Oporapa", "Palestina", "Pitalito", "Saladoblanco", "San agustín", "Timaná", "Albania", "Barrancas",
+        "Dibulla", "Distracción", "El milino", "Fonseca", "Hatonuevo", "La jagua del pilar", "Maicao", "Manaure", "Riohacha", "San juan del cesar", "Uribia", "Urumita", "Villanueva", "Algarrobo", "Aracataca", "Ariguaní", "Cerro de san antonio", "Chibolo", "Ciénaga", "Concordia", 
+        "El banco", "El piñón", "El retén", "Fundación", "Guamal", "Nueva granada", "Pedraza", "Pijiño del carmen", "Pivijay", "Plato", "Pueblo viejo", "Remolino", "Sabanas de san ángel", "Salamina", "San sebastián de buenavista", "Santa Ana", "Santa bárbara de pinto", "Santa marta",
+        "San zenón", "Sitionuevo", "Tenerife", "Zapayán", "Zona bananera", "Acacías", "Barranca de Upía", "Cabuyaro", "Castilla la nueva", "Cubarral", "Cumaral", "El calvario", "El castillo", "El dorado", "Fuente de oro", "Granada", "Guamal", "La macarena", "Uribe", "Lejanías", "Mapiripán",
+        "Mesetas", "Puerto concordia", "Puerto gaitán", "Puerto lleras", "Puerto lópez", "Puerto rico", "Restrepo", "San carlos de guaroa", "San juan de arama", "San juanito", "San martín", "Villavicencio", "Vista hermosa", "Barbacoas", "El charco", "Francisco pizarro", "La tola", "Magüí payán",
+        "Mosquera", "Olaya herrera", "Roberto payán", "Santa bárbara", "Tumaco", "Aldana", "Contadero", "Córdoba", "Cuaspud", "Cumbal", "Funes", "Guachucal", "Gualmatán", "Iles", "Ipiales", "Potosi", "Puerres", "Pupiales", "Albán", "Arboleda", "Belén", "Colón", "El rosario", "El tablón de gómez",
+        "La cruz", "La unión", "Leiva", "Policarpa", "San bernardo", "San lorenzo", "San pablo", "San pedro de cartago", "Taminango", "Buesaco", "Chachagüí", "Consacá", "El peñol", "El tambo", "La florida", "Nariño", "Pasto", "Sandoná", "Tangua", "Yacuanquer", "Ancuya", "Cumbitara", "Guaitarilla", 
+        "Imués", "La llanada", "Linares", "Los andes", "Mallama", "Ospina", "Providencia", "Ricaurte", "Samaniego", "Santacruz", "Sapuyes", "Túquerres", "Arboledas", "Cucutilla", "Gramalote", "Lourdes", "Salazar de las palmas", "Santiago", "Villa caro", "Cúcuta", "La zulia", "Los patios", "Puerto santander",
+        "San cayetano", "Villa del rosario", "Bucarasica", "El tarra", "Sardinita", "Tibú", "Ábrego", "Cáchira", "Convención", "El carmen", "Hacari", "La esperanza", "La playa de belén", "Ocaña", "San calixto", "Teorama", "Cácota", "Chitagá", "Mutiscua", "Pamplona", "Pamplonita", "Santo domingo de silos", "Bochalema",
+        "Chinácota", "Durania", "Herrán", "Labateca", "Ragonvalia", "Toledo", "Colón", "Mocoa", "Orito", "Puerto asis", "Puerto caicedo", "Puerto guzmán", "Puerto lenguizamo", "San francisco", "San miguel", "Santiago", "Sibundoy", "Valle del guamuez", "Villagarzón", "Armenia", "Buenavista", "Calarcá", "Circasia", "Córdoba",
+        "Filandia","Génova", "La tebaida", "Montenegro", "Pijao", "Quimbaya", "Salento", "Apía", "Balboa", "Belén de umbría", "Dosquebradas", "Guática", "La celia", "La virginira", "Marsella", "Mistrató", "Pereira", "Pueblo rico", "Quinchía", "Santa rosa de cabal", "Santuario", "Providencia", "Santa catalina", "Aguada", "Albania",
+        "Aratoca", "Barbosa", "Barichara", "Barrancabermeja", "Betulia", "Bolívar", "Bucaramanga", "Cabrera", "California", "Capitanejo", "Carcasí", "Cepitá", "Cerrito", "Caralá", "Charta", "Chima", "Chipatá", "Cimitarra", "Concepción", "Confines", "Contratación", "Coromoro", "Curití", "El carmen de chucurí", "El guacamayo", "El peñón",
+        "El playón", "Encino", "Enciso", "Florián", "Floridablanca", "Galán", "Girón", "Guaca", "Guadalupe", "Guapotá", "Guavatá", "Güepsa", "Hato", "Jesús maría", "Jordán", "La belleza", "La paz", "Landázuri", "Lebrija", "Los santos", "Macaravita", "Málaga", "Matanza", "Mogotes", "Molagavita", "Ocamonte", "Oiba", "Onzaga", "Palmar", 
+        "Palmas del socorro", "Páramo", "Piedecuesta", "Pinchote", "Puente nacional", "Puerto parra", "Puerto wilches", "Rionegro", "Sabana de torres", "San andrés", "San benito", "San gil", "San joaquín", "San josé de miranda", "San miguel", "San vicente de chucurí", "Santa bárbara", "Santa helena del opón", "Simacota", "Socorro", "Suaita",
+        "Sucre", "Suratá", "Tona", "Valle de san josé", "Vélez", "Vetas", "Villanueva", "Zapatoca", "Guaranda", "Majagual", "Sucre", "Chalán", "Colosó", "Morroa", "Ovejas", "Sincelejo", "Coveñas", "Palmito", "San onofre", "Santiago de tolú", "Toluviejo", "Buenavista", "Corozal", "El roble", "Galeras", "Los palmitos", "Sampués", "San juan de betulia",
+        "San pedro", "Sincé", "Caimito", "La unión", "San benito de abad", "San marcos", "Alcalá", "Andalucía", "Ansermanuevo", "Argelia", "Bolívar", "Buenaventura", "Buga", "Bugalagrande", "Caicedonia", "Cali", "Calima, el darién", "Candelaria", "Cartago", "Dagua", "El águila", "El cairo", "El cerrito", "El dovio", "Florida", "Ginebra", "Guacarí", "Jamundí",
+        "La cumbre", "La unión", "La victoria", "Obando", "Palmira", "Pradera", "Restrepo", "Riofrío", "Roldanillo", "San pedro", "Sevilla", "Toro", "Trujillo", "Tuluá", "Ulloa", "Versalles", "Vijes", "Yotoco", "Yumbo", "Zarzal", "Carurú", "Mitú", "Taraira", "Cumaribo", "La primavera", "Puerto carreño", "Santa rosalía"
+    }; 
+    
+    for (int i = 0; i < sizeof(municipios);i++){
+        if (strcmp(munic,municipios[i])==0){
             return 1; // Departamento encontrado en la lista de Colombia
         }
     }
-    return 0;
+    
 }
+
 
 int main()
 {
@@ -132,14 +196,6 @@ int main()
         cout<<"porfavor ingrese su correo electronico"<<endl;
         cin>>persona[i].correo;
         
-        
-        if(correos(persona[i].correo)){
-            printf("El correo %s es valido.\n", persona[i].correo);
- 
-        } else{
-            printf("El correo %s no es valido.\n", persona[i].correo);
-        } 
-        
         cout<<"porfavor ingrese el departamento de nacimiento"<<endl;
         cin>>persona[i].direct.departamento;
         
@@ -153,6 +209,13 @@ int main()
             
         cout<<"porfavor ingrese el municipio de procedencia"<<endl;
         cin>>persona[i].direct.municipio;
+        
+        if (muni(persona[i].direct.municipio)){
+            printf("El municipio %s pertenece a Colombia.\n", persona[i].direct.municipio);
+        }else {
+            printf("El municipio %s no pertenece a Colombia.\n", persona[i].direct.municipio);
+        }
+        
         
         cout<<"porfavor ingrese su direccion de residencia"<<endl;
         cin>>persona[i].direct.direccion;
@@ -172,7 +235,7 @@ int main()
         case 1: char name[100];
                 cout<<"ingrese el nombre a buscar"<<endl;
                 cin>>name;
-                for(i=0;i<n;i++){
+                for(i=0;i<7;i++){
                         
                     if ((name== persona[i].nombre)==0){
                         cout<<persona[i].nombre<<"";
@@ -310,6 +373,7 @@ int main()
 
 }
     
+
 
 
 
