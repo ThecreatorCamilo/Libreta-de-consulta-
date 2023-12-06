@@ -206,8 +206,7 @@ int main()
         cin>>persona[i].correo;
         
         cout<<"Porfavor ingrese el departamento de nacimiento"<<endl;
-        cout<<"Tenga en cuenta que no puede colocar espacios estos serán remplazados por un backslash, ejemplo: \n
-        Valle_del_cauca"<<endl;
+        cout<<"Tenga en cuenta que no puede colocar espacios estos serán remplazados por un backslash, ejemplo: \n Valle_del_cauca"<<endl;
         cout<<"Debe ir unicamente la primera letra en mayúscula, de lo contrario habrán errores en la ejecución y lectura de datos"<<endl;
         cin>>persona[i].direct.departamento;
         
@@ -220,8 +219,7 @@ int main()
         }
             
         cout<<"Porfavor ingrese el municipio de procedencia"<<endl;
-        cout<<"Tenga en cuenta que no puede colocar espacios estos serán remplazados por un backslash, ejemplo: \n
-        La_calera"<<endl;
+        cout<<"Tenga en cuenta que no puede colocar espacios estos serán remplazados por un backslash, ejemplo: \n La_calera"<<endl;
         cout<<"Debe ir unicamente la primera letra en mayúscula, de lo contrario habrán errores en la ejecución y lectura de datos"<<endl;
 
         cin>>persona[i].direct.municipio;
