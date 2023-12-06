@@ -42,9 +42,9 @@ int esDepartamentoColombia(const char *departamento) {
         "Amazonas", "Antioquia", "Arauca", "Atlántico", "Bolívar",
         "Boyacá", "Caldas", "Caquetá", "Casanare", "Cauca", "Cesar",
         "Chocó", "Córdoba", "Cundinamarca", "Guainía", "Guaviare",
-        "Huila", "La_Guajira", "Magdalena", "Meta", "Nariño", "Norte_de_Santander",
-        "Putumayo", "Quindío", "Risaralda", "San_Andrés_y_Providencia", "Santander",
-        "Sucre", "Tolima", "Valle_del_Cauca", "Vaupés", "Vichada"
+        "Huila", "La_guajira", "Magdalena", "Meta", "Nariño", "Norte_de_santander",
+        "Putumayo", "Quindío", "Risaralda", "San_andrés_y_providencia", "Santander",
+        "Sucre", "Tolima", "Valle_del_cauca", "Vaupés", "Vichada"
     };
     
     
@@ -188,19 +188,27 @@ int main()
         cout<<" del año "<<year;
         cout<<" a las "<< time->tm_hour<<":"<<time->tm_min<<":"<<time->tm_sec<<"\n";
         
-        cout<<"porfavor ingrese el nombre"<<endl;
+        cout<<"Porfavor ingrese el nombre"<<endl;
+        cout<<"Debe ir unicamente la primera letra en mayúscula, de lo contrario habrán errores en la ejecución y lectura de datos"<<endl;
+
         cin>>persona[i].nombre;
         
-        cout<<"porfavor ingrese su apellido"<<endl;
+        cout<<"Porfavor ingrese su apellido"<<endl;
+        cout<<"Debe ir unicamente la primera letra en mayúscula, de lo contrario habrán errores en la ejecución y lectura de datos"<<endl;
+
         cin>>persona[i].apellido;
         
-        cout<<"porfavor ingrese su edad"<<endl;
+        cout<<"Porfavor ingrese su edad"<<endl;
+
         cin>>persona[i].edad;
         
-        cout<<"porfavor ingrese su correo electronico"<<endl;
+        cout<<"Porfavor ingrese su correo electronico"<<endl;
         cin>>persona[i].correo;
         
-        cout<<"porfavor ingrese el departamento de nacimiento"<<endl;
+        cout<<"Porfavor ingrese el departamento de nacimiento"<<endl;
+        cout<<"Tenga en cuenta que no puede colocar espacios estos serán remplazados por un backslash, ejemplo: \n
+        Valle_del_cauca"<<endl;
+        cout<<"Debe ir unicamente la primera letra en mayúscula, de lo contrario habrán errores en la ejecución y lectura de datos"<<endl;
         cin>>persona[i].direct.departamento;
         
         struct direccion direct;
@@ -211,7 +219,11 @@ int main()
             printf("El departamento %s no pertenece a Colombia.\n", persona[i].direct.departamento);
         }
             
-        cout<<"porfavor ingrese el municipio de procedencia"<<endl;
+        cout<<"Porfavor ingrese el municipio de procedencia"<<endl;
+        cout<<"Tenga en cuenta que no puede colocar espacios estos serán remplazados por un backslash, ejemplo: \n
+        La_calera"<<endl;
+        cout<<"Debe ir unicamente la primera letra en mayúscula, de lo contrario habrán errores en la ejecución y lectura de datos"<<endl;
+
         cin>>persona[i].direct.municipio;
         
         if (muni(persona[i].direct.municipio)){
@@ -221,10 +233,10 @@ int main()
         }
         
         
-        cout<<"porfavor ingrese su direccion de residencia"<<endl;
+        cout<<"Porfavor ingrese su direccion de residencia"<<endl;
         cin>>persona[i].direct.direccion;
         
-        cout<<"porfavor ingrese sus apuntes del dia de hoy"<<endl;
+        cout<<"Porfavor ingrese sus apuntes del dia de hoy"<<endl;
         cin>>persona[i].apuntes;
         
         getch();
@@ -365,12 +377,19 @@ int main()
                             cout<<persona[i].direct.direccion;
                             cout<<persona[i].apuntes;
                         }
+                
                     }
                 }
                 break;
+                
     }        
+    
+
+
 }
     
+
+
 
 
 
